@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeRobo — Humanize writing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark"><span></span><span></span><span></span></span><span>DeRobo</span></a>
+    <nav><a class="active" href="#humanizer">Humanizer</a><a href="#how">How it works</a><a href="#about">About</a></nav>
+    <div class="header-actions"><button class="icon-btn" aria-label="Toggle theme" id="themeBtn">☼</button><button class="ghost-btn">Sign in</button><button class="dark-btn small">Get started <span>↗</span></button></div>
+  </header>
+
+  <main id="humanizer">
+    <section class="hero"><div class="eyebrow"><i></i> AI writing, made yours</div><h1>Make it sound<br><em>human.</em></h1><p>Transform AI-generated text into clear, natural writing while keeping your original meaning intact.</p></section>
+
+    <section class="feature-tabs"><button class="feature-tab active" data-mode="humanize">✦ Humanize</button><button class="feature-tab" data-mode="paraphrase">↻ Paraphrase</button><button class="feature-tab" data-mode="shorten">↘ Shorten</button><button class="feature-tab" data-mode="expand">↗ Expand</button><button class="feature-tab" data-mode="grammar">✓ Grammar check</button></section>
+    <section class="workspace">
+      <div class="workspace-top"><div><span class="step">01</span><strong>Paste your text</strong><span class="hint">Up to 5,000 words</span></div><div class="top-tools"><button class="text-btn" id="clearBtn">Clear</button><button class="text-btn" id="sampleBtn">Try a sample <span>↗</span></button></div></div>
+      <div class="panes">
+        <div class="pane input-pane"><textarea id="inputText" placeholder="Paste your AI-generated text here..." maxlength="30000"></textarea><div class="pane-footer"><span id="inputCount">0 words</span><button class="paste-btn" id="pasteBtn">⌘ Paste</button></div></div>
+        <div class="swap">→</div>
+        <div class="pane output-pane"><div id="outputText" class="output-placeholder">Your humanized writing will appear here.</div><div class="pane-footer"><span id="outputCount">0 words</span><button class="copy-btn" id="copyBtn" disabled>Copy text</button></div></div>
+      </div>
+      <div class="controls"><div class="control-group"><label for="style">Writing style</label><select id="style"><option value="natural">Natural & clear</option><option value="professional">Professional</option><option value="casual">Casual & warm</option><option value="academic">Academic</option><option value="persuasive">Persuasive</option></select></div><div class="control-group"><label>Humanization level</label><div class="level"><button class="level-btn active" data-level="light">Light</button><button class="level-btn" data-level="balanced">Balanced</button><button class="level-btn" data-level="deep">Deep</button></div></div><div class="control-group creativity"><label>Creativity <span id="creativityValue">Balanced</span></label><input id="creativity" type="range" min="0" max="100" value="50"></div><button class="humanize-btn" id="humanizeBtn"><span class="spark">✦</span> Humanize text <span>↗</span></button></div>
+      <div class="advanced-row"><label><input type="checkbox" id="preserveTerms" checked> Preserve important terms</label><label><input type="checkbox" id="showChanges"> Highlight changes</label><button id="historyBtn" class="history-btn">◷ View history</button></div>
+    </section>
+
+    <section class="trust"><div class="trust-item"><b>✓</b><span><strong>Meaning preserved</strong><small>We keep your message intact</small></span></div><div class="trust-item"><b>◎</b><span><strong>Privacy first</strong><small>Your text is never stored</small></span></div><div class="trust-item"><b>⌁</b><span><strong>Built for nuance</strong><small>Not just a synonym swap</small></span></div></section>
+
+    <section class="history-panel" id="historyPanel"><div class="history-head"><strong>Recent drafts</strong><button id="closeHistory">×</button></div><div id="historyList"><p class="empty-history">Your recent drafts will show up here.</p></div></section>
+    <section class="how" id="how"><div class="section-label">THE DE ROBO DIFFERENCE</div><h2>Less robotic.<br><span>More you.</span></h2><div class="cards"><article><div class="number">01</div><h3>Keep the meaning</h3><p>We focus on the way your words flow—not changing what you actually said.</p></article><article><div class="number">02</div><h3>Read naturally</h3><p>Thoughtful edits remove repetitive patterns, stiff phrasing, and AI-isms.</p></article><article><div class="number">03</div><h3>Stay in control</h3><p>Choose the tone and intensity that feels right for your audience.</p></article></div></section>
+  </main>
+  <footer><a class="brand" href="#"><span class="brand-mark"><span></span><span></span><span></span></span><span>DeRobo</span></a><span>Human words for a digital world.</span><span>© 2025 DeRobo AI</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
