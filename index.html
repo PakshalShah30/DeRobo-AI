@@ -3,40 +3,147 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DeRobo — Humanize writing</title>
+  <title>DeRobo — make writing sound like you</title>
+  <meta name="description" content="Find the stock phrases, filler and flat rhythm that make writing sound robotic, then fix them — in your browser, without sending your text anywhere." />
+  <meta name="theme-color" content="#f6faf7" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23398461'/%3E%3Crect x='8' y='9' width='4' height='14' rx='2' fill='%23fff'/%3E%3Crect x='14' y='6' width='4' height='20' rx='2' fill='%23fff' opacity='.8'/%3E%3Crect x='20' y='11' width='4' height='10' rx='2' fill='%23fff' opacity='.6'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <a class="skip" href="#inputText">Skip to the editor</a>
   <header class="topbar">
-    <a class="brand" href="#"><span class="brand-mark"><span></span><span></span><span></span></span><span>DeRobo</span></a>
-    <nav><a class="active" href="#humanizer">Humanizer</a><a href="#how">How it works</a><a href="#about">About</a></nav>
-    <div class="header-actions"><button class="icon-btn" aria-label="Toggle theme" id="themeBtn">☼</button><button class="ghost-btn">Sign in</button><button class="dark-btn small">Get started <span>↗</span></button></div>
+    <a class="brand" href="#top" aria-label="DeRobo home"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span>DeRobo</span></a>
+    <nav aria-label="Sections"><a href="#humanizer">Editor</a><a href="#how">How it works</a><a href="#rules">What it flags</a></nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch to dark theme" aria-pressed="false">☾</button>
+      <a class="ghost-btn" href="https://github.com/PakshalShah30/DeRobo-AI" rel="noopener">GitHub ↗</a>
+    </div>
   </header>
 
-  <main id="humanizer">
-    <section class="hero"><div class="eyebrow"><i></i> AI writing, made yours</div><h1>Make it sound<br><em>human.</em></h1><p>Transform AI-generated text into clear, natural writing while keeping your original meaning intact.</p></section>
-
-    <section class="feature-tabs"><button class="feature-tab active" data-mode="humanize">✦ Humanize</button><button class="feature-tab" data-mode="paraphrase">↻ Paraphrase</button><button class="feature-tab" data-mode="shorten">↘ Shorten</button><button class="feature-tab" data-mode="expand">↗ Expand</button><button class="feature-tab" data-mode="grammar">✓ Grammar check</button></section>
-    <section class="workspace">
-      <div class="workspace-top"><div><span class="step">01</span><strong>Paste your text</strong><span class="hint">Up to 5,000 words</span></div><div class="top-tools"><button class="text-btn" id="clearBtn">Clear</button><button class="text-btn" id="sampleBtn">Try a sample <span>↗</span></button></div></div>
-      <div class="panes">
-        <div class="pane input-pane"><textarea id="inputText" placeholder="Paste your AI-generated text here..." maxlength="30000"></textarea><div class="pane-footer"><span id="inputCount">0 words</span><button class="paste-btn" id="pasteBtn">⌘ Paste</button></div></div>
-        <div class="swap">→</div>
-        <div class="pane output-pane"><div id="outputText" class="output-placeholder">Your humanized writing will appear here.</div><div class="pane-footer"><span id="outputCount">0 words</span><button class="copy-btn" id="copyBtn" disabled>Copy text</button></div></div>
-      </div>
-      <div class="controls"><div class="control-group"><label for="style">Writing style</label><select id="style"><option value="natural">Natural & clear</option><option value="professional">Professional</option><option value="casual">Casual & warm</option><option value="academic">Academic</option><option value="persuasive">Persuasive</option></select></div><div class="control-group"><label>Humanization level</label><div class="level"><button class="level-btn active" data-level="light">Light</button><button class="level-btn" data-level="balanced">Balanced</button><button class="level-btn" data-level="deep">Deep</button></div></div><div class="control-group creativity"><label>Creativity <span id="creativityValue">Balanced</span></label><input id="creativity" type="range" min="0" max="100" value="50"></div><button class="humanize-btn" id="humanizeBtn"><span class="spark">✦</span> Humanize text <span>↗</span></button></div>
-      <div class="advanced-row"><label><input type="checkbox" id="preserveTerms" checked> Preserve important terms</label><label><input type="checkbox" id="showChanges"> Highlight changes</label><button id="historyBtn" class="history-btn">◷ View history</button></div>
+  <main id="top">
+    <section class="hero" id="humanizer">
+      <div class="eyebrow"><i></i> Runs in your browser · nothing is uploaded</div>
+      <h1>Make it sound<br><em>like you.</em></h1>
+      <p>DeRobo finds the stock phrases, filler and flat rhythm that make writing read as generated, shows you exactly where they are, and fixes them — without touching your numbers, names or quotes.</p>
     </section>
 
-    <section class="trust"><div class="trust-item"><b>✓</b><span><strong>Meaning preserved</strong><small>We keep your message intact</small></span></div><div class="trust-item"><b>◎</b><span><strong>Privacy first</strong><small>Your text is never stored</small></span></div><div class="trust-item"><b>⌁</b><span><strong>Built for nuance</strong><small>Not just a synonym swap</small></span></div></section>
+    <div class="feature-tabs" role="tablist" aria-label="Mode">
+      <button class="feature-tab active" role="tab" aria-selected="true" data-mode="humanize" type="button">✦ Humanize</button>
+      <button class="feature-tab" role="tab" aria-selected="false" data-mode="paraphrase" type="button">↻ Plain words</button>
+      <button class="feature-tab" role="tab" aria-selected="false" data-mode="shorten" type="button">↘ Shorten</button>
+      <button class="feature-tab" role="tab" aria-selected="false" data-mode="expand" type="button">↗ Expand prompts</button>
+      <button class="feature-tab" role="tab" aria-selected="false" data-mode="grammar" type="button">✓ Grammar</button>
+    </div>
+    <p class="mode-hint" id="modeHint" aria-live="polite"></p>
 
-    <section class="history-panel" id="historyPanel"><div class="history-head"><strong>Recent drafts</strong><button id="closeHistory">×</button></div><div id="historyList"><p class="empty-history">Your recent drafts will show up here.</p></div></section>
-    <section class="how" id="how"><div class="section-label">THE DE ROBO DIFFERENCE</div><h2>Less robotic.<br><span>More you.</span></h2><div class="cards"><article><div class="number">01</div><h3>Keep the meaning</h3><p>We focus on the way your words flow—not changing what you actually said.</p></article><article><div class="number">02</div><h3>Read naturally</h3><p>Thoughtful edits remove repetitive patterns, stiff phrasing, and AI-isms.</p></article><article><div class="number">03</div><h3>Stay in control</h3><p>Choose the tone and intensity that feels right for your audience.</p></article></div></section>
+    <section class="workspace" aria-label="Editor">
+      <div class="workspace-top">
+        <div><span class="step">01</span><strong>Paste your text</strong><span class="hint">Up to 5,000 words</span></div>
+        <div class="top-tools"><button class="text-btn" id="clearBtn" type="button">Clear</button><button class="text-btn" id="sampleBtn" type="button">Try a sample ↗</button></div>
+      </div>
+      <div class="panes">
+        <div class="pane input-pane">
+          <label class="sr-only" for="inputText">Your text</label>
+          <textarea id="inputText" placeholder="Paste a draft here — an email, a cover letter, a post…" maxlength="36000" spellcheck="true"></textarea>
+          <div class="pane-footer"><span id="inputCount">0 words</span><button class="paste-btn" id="pasteBtn" type="button">Paste</button></div>
+        </div>
+        <div class="swap" aria-hidden="true">→</div>
+        <div class="pane output-pane">
+          <div id="outputText" class="output-placeholder" aria-live="polite" tabindex="0">Your rewritten text will appear here.</div>
+          <div class="pane-footer"><span id="outputCount">0 words</span><button class="copy-btn" id="copyBtn" type="button" disabled>Copy text</button></div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="control-group">
+          <label for="style">Writing style</label>
+          <select id="style">
+            <option value="natural">Natural &amp; clear</option>
+            <option value="professional">Professional</option>
+            <option value="casual">Casual &amp; warm</option>
+            <option value="academic">Academic</option>
+            <option value="persuasive">Persuasive</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <span class="label" id="levelLabel">Strength</span>
+          <div class="level" role="radiogroup" aria-labelledby="levelLabel">
+            <button class="level-btn active" role="radio" aria-checked="true" data-level="light" type="button">Light</button>
+            <button class="level-btn" role="radio" aria-checked="false" data-level="balanced" type="button">Balanced</button>
+            <button class="level-btn" role="radio" aria-checked="false" data-level="deep" type="button">Deep</button>
+          </div>
+        </div>
+        <div class="control-group creativity">
+          <label for="creativity">Creativity <span id="creativityValue">Balanced</span></label>
+          <input id="creativity" type="range" min="0" max="100" value="50" />
+        </div>
+        <button class="humanize-btn" id="humanizeBtn" type="button"><span class="spark">✦</span> <span id="actionLabel">Humanize text</span> <span aria-hidden="true">↗</span></button>
+      </div>
+
+      <div class="advanced-row">
+        <label><input type="checkbox" id="preserveTerms" checked> Lock numbers, names, quotes &amp; links</label>
+        <label class="terms"><span>Also keep</span> <input id="termsInput" type="text" placeholder="e.g. Salesforce, SLA, our product name" /></label>
+        <label><input type="checkbox" id="showChanges"> Highlight changes</label>
+        <button id="historyBtn" class="history-btn" type="button" aria-expanded="false" aria-controls="historyPanel">◷ History</button>
+      </div>
+    </section>
+
+    <section class="history-panel" id="historyPanel" aria-label="Recent drafts" hidden>
+      <div class="history-head"><strong>Recent drafts</strong><div><button id="clearHistory" type="button" class="text-btn">Clear</button><button id="closeHistory" type="button" aria-label="Close history">×</button></div></div>
+      <div id="historyList"></div>
+      <p class="muted small">Saved only in this browser.</p>
+    </section>
+
+    <section class="report" id="report" aria-label="Robo-speak report" hidden>
+      <div class="report-score">
+        <div class="gauge" id="gaugeBefore"><span class="gauge-num">0</span><small>before</small></div>
+        <div class="gauge-arrow" aria-hidden="true">→</div>
+        <div class="gauge" id="gaugeAfter"><span class="gauge-num">—</span><small>after</small></div>
+        <div class="report-copy">
+          <h2>Robo-speak score</h2>
+          <p id="scoreLabel" class="score-label"></p>
+          <p class="muted small">0 reads human, 100 reads like a template. A style check for stock phrases, filler and flat rhythm — <strong>not</strong> an AI detector.</p>
+        </div>
+      </div>
+      <div class="report-grid">
+        <div>
+          <h3>Where it sounds robotic</h3>
+          <div id="marked" class="marked" tabindex="0"></div>
+        </div>
+        <div>
+          <h3>What was flagged</h3>
+          <div id="categories" class="chips"></div>
+          <ul id="findings" class="findings"></ul>
+          <dl id="stats" class="stats"></dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust" aria-label="Promises">
+      <div class="trust-item"><b>✓</b><span><strong>Facts stay put</strong><small>Numbers, names, quotes and links are locked</small></span></div>
+      <div class="trust-item"><b>◎</b><span><strong>Private by design</strong><small>Everything runs on your device</small></span></div>
+      <div class="trust-item"><b>⌁</b><span><strong>Shows its work</strong><small>Every change is explained and reversible</small></span></div>
+    </section>
+
+    <section class="how" id="how">
+      <div class="section-label">HOW IT WORKS</div>
+      <h2>Less robotic.<br><span>More you.</span></h2>
+      <div class="cards">
+        <article><div class="number">01</div><h3>Find the tells</h3><p>Stock openers, "it is important to note that", stacked "Furthermore"s, buzzwords and sentences that all run the same length.</p></article>
+        <article><div class="number">02</div><h3>Fix, don't invent</h3><p>Rewrites remove padding and swap jargon for plain words. Expand adds prompts for <em>your</em> details instead of making claims up.</p></article>
+        <article><div class="number">03</div><h3>Stay in control</h3><p>Pick the strength and style, lock your own terms, and see every change highlighted before you copy it.</p></article>
+      </div>
+    </section>
+
+    <section class="rules" id="rules">
+      <div class="section-label">WHAT IT FLAGS</div>
+      <div id="ruleList" class="rule-list"></div>
+    </section>
   </main>
-  <footer><a class="brand" href="#"><span class="brand-mark"><span></span><span></span><span></span></span><span>DeRobo</span></a><span>Human words for a digital world.</span><span>© 2025 DeRobo AI</span></footer>
-  <script src="app.js"></script>
+  <footer><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span>DeRobo</span></a><span>Human words for a digital world.</span><span>© 2026 DeRobo</span></footer>
+  <script type="module" src="src/app.js"></script>
 </body>
 </html>
